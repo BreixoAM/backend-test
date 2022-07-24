@@ -1,5 +1,5 @@
 controllers:
-    resource: ../src/Controller/
+    resource: ../src/Beer/Application/Controller/
     type: annotation
 
 kernel:
