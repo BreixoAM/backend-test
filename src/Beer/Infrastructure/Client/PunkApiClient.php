@@ -8,6 +8,7 @@ use App\Beer\Domain\Entity\Beer;
 use App\Beer\Domain\Exception\NotFoundException;
 use App\Beer\Domain\Factory\BeerFactory;
 use App\Beer\Domain\Repository\BeerRepositoryInterface;
+use Exception;
 use loophp\collection\Collection;
 use loophp\collection\Contract\Collection as CollectionInstance;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -32,7 +33,7 @@ class PunkApiClient implements BeerRepositoryInterface
         try {
             $response = $this->client->request('GET', $url);
             $content = $response->toArray()[0];
-        } catch (Throwable $e) {
+        } catch (Exception|Throwable $e) {
             throw new NotFoundException($e->getMessage());
         }
 

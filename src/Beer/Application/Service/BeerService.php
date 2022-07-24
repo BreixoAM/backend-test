@@ -6,7 +6,6 @@ namespace App\Beer\Application\Service;
 
 use App\Beer\Application\Factory\BeerFactory;
 use App\Beer\Application\Model\Beer as beerModel;
-use App\Beer\Domain\Entity\Beer as BeerEntity;
 use App\Beer\Domain\Repository\BeerRepositoryInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -36,9 +35,9 @@ class BeerService
     {
         $beers = $this->beerRepository->searchByFood($food);
 
-        $beersCollection = $beers->map(function (BeerEntity $beerEntity): BeerModel {
+        $beersCollection = $beers->map(function ($beerEntity): BeerModel {
             return $this->beerFactory->createModelFromEntity($beerEntity);
-        });
+        })->squash();
 
         return $this->serializer->serialize(
             $beersCollection,
