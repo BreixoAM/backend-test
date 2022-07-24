@@ -73,7 +73,7 @@ class PunkApiClientTest extends TestCase
     }
 
     /** @test */
-    public function getByIdReturnsNotFoundException(): void
+    public function getByIdThrowsNotFoundException(): void
     {
         $url = self::PUNK_API_URL.'/'.self::ID;
         $this->httpClientProphecy
@@ -111,5 +111,19 @@ class PunkApiClientTest extends TestCase
         $result = $this->punkApiClient->searchByFood(self::FOOD);
 
         self::assertCount(1, $result);
+    }
+
+    /** @test */
+    public function searchByFoodThrowsNotFoundException(): void
+    {
+        $url = self::PUNK_API_URL.'?food='.self::FOOD;
+        $this->httpClientProphecy
+            ->request('GET', $url)
+            ->shouldBeCalledOnce()
+            ->willThrow(new Exception('Error'));
+
+        $this->expectException(NotFoundException::class);
+
+        $this->punkApiClient->searchByFood(self::FOOD);
     }
 }

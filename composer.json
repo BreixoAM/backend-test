@@ -27,7 +27,8 @@
             "composer/package-versions-deprecated": true,
             "symfony/flex": true,
             "symfony/runtime": true,
-            "phpstan/extension-installer": true
+            "phpstan/extension-installer": true,
+            "infection/extension-installer": true
         },
         "optimize-autoloader": true,
         "preferred-install": {
@@ -77,6 +78,7 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.9",
+        "infection/infection": "^0.26.13",
         "jangregor/phpstan-prophecy": "^1.0",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpstan/extension-installer": "^1.1",
