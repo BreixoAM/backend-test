@@ -5,7 +5,7 @@ up:
 	docker-compose up --detach
 
 composer:
-	composer install
+	docker exec -it php-backend-test composer install
 
 start: build up composer
 
