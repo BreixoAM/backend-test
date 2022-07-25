@@ -1,0 +1,10 @@
+default:
+    suites:
+        default:
+            contexts:
+                - App\Tests\Behat\ApiContext
+            paths:
+                features: tests/Behat/features
+
+    extensions:
+        FriendsOfBehat\SymfonyExtension: null
