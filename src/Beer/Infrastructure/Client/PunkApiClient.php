@@ -17,9 +17,9 @@ use Throwable;
 class PunkApiClient implements BeerRepositoryInterface
 {
     public function __construct(
-        private HttpClientInterface $client,
-        private BeerFactory $beerFactory,
-        private string $punkApiUrl
+        private readonly HttpClientInterface $client,
+        private readonly BeerFactory $beerFactory,
+        private readonly string $punkApiUrl
     ) {
     }
 

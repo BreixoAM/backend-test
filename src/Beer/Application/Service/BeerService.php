@@ -6,6 +6,7 @@ namespace App\Beer\Application\Service;
 
 use App\Beer\Application\Factory\BeerFactory;
 use App\Beer\Application\Model\Beer as beerModel;
+use App\Beer\Domain\Exception\NotFoundException;
 use App\Beer\Domain\Repository\BeerRepositoryInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -13,12 +14,15 @@ use Symfony\Component\Serializer\SerializerInterface;
 class BeerService
 {
     public function __construct(
-        private SerializerInterface $serializer,
-        private BeerRepositoryInterface $beerRepository,
-        private BeerFactory $beerFactory
+        private readonly SerializerInterface $serializer,
+        private readonly BeerRepositoryInterface $beerRepository,
+        private readonly BeerFactory $beerFactory
     ) {
     }
 
+    /**
+     * @throws NotFoundException
+     */
     public function getById(int $id, string $groups = 'details'): string
     {
         $beerEntity = $this->beerRepository->getById($id);
@@ -31,6 +35,9 @@ class BeerService
         );
     }
 
+    /**
+     * @throws NotFoundException
+     */
     public function searchByFood(string $food, string $groups = 'list'): string
     {
         $beers = $this->beerRepository->searchByFood($food);
